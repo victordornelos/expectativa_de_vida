@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 <p align="center">
-  <img src="foto.png" alt="Saúde">
+  <img src="imagem" alt="Saúde">
 </p>
 
 **Autor:** Victor Flávio P. Dornelos\
