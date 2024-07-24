@@ -60,3 +60,138 @@ Devido à natureza dos efeitos fixos, que trabalham com várias observações da
 
 ## 4. Metodologia
 
+A metodologia deste estudo foi baseada no livro "The Effect: An Introduction to Research Design and Causality" de Nick Huntington-Klein. Inicialmente, os dados foram obtidos a partir de um dataset disponibilizado no Kaggle, que utiliza informações fornecidas pelo Banco Mundial. O dataset está disponível nos arquivos do projeto e o link será incluído nas referências. A linguagem de programação escolhida foi Python, utilizando Jupyter Notebook integrado ao Visual Studio Code (VSC) e PyCharm Professional
+
+Primeiramente, foi realizada uma análise exploratória inicial dos dados categóricos usando a biblioteca Pandas, criando um DataFrame específico para esses dados. Em seguida, um gráfico foi criado usando Plotly para analisar os grupos de renda, além de um dashboard com um mapa que mostra a evolução da expectativa de vida nos países ao longo do tempo.
+
+1- Tratando os dados:
+```python
+# Bibliotecas
+import pandas as pd
+import plotly.express as px
+
+# Importando dados
+data = pd.read_csv('expectativa_vida.csv')
+
+# Tratando
+df = pd.DataFrame()
+df['Países'] = data['Country Name']
+df['Anos'] = data['Year']
+df['Cod país'] = data['Country Code']
+df['Expectativa de vida'] = data['Life Expectancy World Bank']
+df['Região'] = data['Region']
+df['Grupo de renda'] = data['IncomeGroup']
+
+# Salvando
+df.to_csv('mapa.csv', index=False)
+```
+2- Gráfico de grupo de renda:
+```python
+# Agrupando os dados por ano e grupo de renda para obter a média da expectativa de vida
+grouped_data = data.groupby(['Anos', 'Grupo de renda'])['Expectativa de vida'].mean().reset_index()
+
+# Dashboard
+fig = px.bar(grouped_data, 
+             x='Grupo de renda', 
+             y='Expectativa de vida', 
+             animation_frame='Anos', 
+             animation_group='Grupo de renda', 
+             range_y=[0, 100], 
+             title='Expectativa de Vida Média por Grupo de Renda ao Longo dos Anos',
+             labels={'Expectativa de vida': 'Expectativa de Vida Média', 'Grupo de renda': 'Grupo de Renda'},
+             color='Grupo de renda',
+             color_discrete_sequence=px.colors.qualitative.Vivid)
+
+fig.update_layout(yaxis=dict(title='Expectativa de Vida Média'),
+                  xaxis=dict(title='Grupo de Renda'),
+                  title={'text': 'Expectativa de Vida Média por Grupo de Renda ao Longo dos Anos', 'x': 0.5},
+                  uniformtext_minsize=8, uniformtext_mode='hide')
+
+fig.update_traces(texttemplate='%{y:.2f}', textposition='outside', textfont=dict(color='white'))
+
+fig.show()
+```
+3- Dashboard do mapa:
+```python
+
+#Tratando os dados para compatibilidade 
+average_life_expectancy_by_country_year = data.groupby(['Anos', 'Países'])['Expectativa de vida'].mean().reset_index()
+average_life_expectancy_by_country_year = average_life_expectancy_by_country_year.rename(columns={'Anos': 'Year', 'Países': 'Country', 'Expectativa de vida': 'Life Expectancy'})
+
+# Dashboard 
+fig = px.choropleth(
+    average_life_expectancy_by_country_year,
+    locations='Country',
+    locationmode='country names',
+    color='Life Expectancy',
+    color_continuous_scale=px.colors.sequential.Viridis,  
+    title='Expectativa de Vida Média por País',
+    labels={'Life Expectancy': 'Expectativa de Vida'},
+    animation_frame='Year',  
+    width=1200,  
+    height=800   
+)
+
+fig.update_layout(
+    title={
+        'text': 'Dashboard da Expectativa de Vida por País',
+        'y': 0.9,
+        'x': 0.5,
+        'xanchor': 'center',
+        'yanchor': 'top'
+    },
+    geo=dict(
+        showcoastlines=True,
+        coastlinecolor="Black",
+        showland=True,
+        landcolor="white"
+    )
+)
+
+fig.show()
+```
+Após essa análise preliminar, foram selecionadas as principais variáveis para modelar a regressão linear com dados em painel, utilizando a biblioteca Statsmodels. O modelo foi implementado com o uso de efeitos fixos e erros padrão robustos agrupados. Por fim, foi criado um gráfico de dispersão utilizando a biblioteca Seaborn para analisar se os pressupostos do OLS foram atendidos, verificando assim a robustez do modelo.
+
+4- Tratando dados para o modelo:
+```python
+# Bibliotecas
+import pandas as pd
+import statsmodels.formula.api as smf
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Importando dados
+data = pd.read_csv('expectativa_vida.csv')
+
+# Tratando o database
+data.set_index(['Country Name', 'Year'], inplace=True)
+variables = data.drop(columns=['Country Code', 'Region', 'Corruption','Injuries', 'Communicable', 'NonCommunicable'])
+variables = variables.dropna()
+df = variables.reset_index()
+```
+5- Modelando:
+```python
+# Modelando 
+formula = 'Q("Life Expectancy World Bank") ~ Q("Prevelance of Undernourishment") + Q("CO2") + Q("Health Expenditure %") + Q("Education Expenditure %") + Q("Unemployment") + Q("Sanitation") + C(Q("Country Name")) + C(Q("IncomeGroup"))'
+fixed_effects_model = smf.ols(formula, data=df).fit(cov_type='cluster', cov_kwds={'groups': df['Country Name']})
+fixed_effects_model.summary()
+```
+5- Análise dos resíduos:
+```python
+# Calculando os valores previstos
+df['predicted'] = fixed_effects_model.fittedvalues
+# Calculando os resíduos
+df['residuals'] = fixed_effects_model.resid
+
+# Gráfico de dispersão 
+plt.figure(figsize=(10, 6))
+sns.scatterplot(x='predicted', y='residuals', data=df)
+plt.axhline(y=0, color='red', linestyle='-') 
+plt.title('Gráfico de Dispersão dos Resíduos')
+plt.xlabel('Valores Previstos')
+plt.ylabel('Resíduos')
+plt.grid(False)
+plt.show()
+```
+Esta abordagem permitiu uma análise detalhada e robusta dos dados, contribuindo para uma melhor compreensão das relações causais presentes no conjunto de dados estudado.
+
