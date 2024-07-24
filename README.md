@@ -220,6 +220,10 @@ A ideia central deste estudo é verificar a hipótese de que fatores socioeconô
 
 Analisando o gráfico acima, percebe-se que as pessoas estão vivendo cada vez mais ao longo dos anos, com um crescimento linear de 2001 até 2019. Isso torna ainda mais relevante compreender os fatores que contribuíram para essa melhoria. Além disso, é crucial verificar se essa tendência ocorreu em todos os países, independentemente da renda. No gráfico abaixo, é possível identificar dois comportamentos: quanto mais pobre o grupo, menor sua expectativa de vida; e quanto mais pobre foi o grupo de renda, maior foi o crescimento da expectativa de vida durante o período analisado.
 
+<p align="center">
+  <img src="imagem/life_expectancy_by_income_group.gif" alt="Saúde">
+</p>
+
 O mapa abaixo reforça essa análise, indicando que as regiões mais pobres tiveram os maiores aumentos na duração da vida em comparação com as mais ricas. No entanto, é importante notar que nem todos os países tiveram dados disponíveis para esta pesquisa.
 
 <p align="center">
