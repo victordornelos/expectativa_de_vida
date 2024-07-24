@@ -261,6 +261,8 @@ Realizando um gráfico de dispersão dos resíduos para verificação dos pressu
 
 Este estudo destaca a importância de fatores socioeconômicos na expectativa de vida dos países, sugerindo que políticas públicas eficazes podem melhorar significativamente a longevidade dos cidadãos. Apesar de algumas limitações, como a heterocedasticidade observada, os insights obtidos fornecem uma base sólida para futuras pesquisas e intervenções.
 
+# 6. Referências:
+HUNTINGTON-KLEIN, Nick. The Effect: An Introduction to Research Design and Causality. Boca Raton, FL: CRC Press, 2022.
 
-
+CHAVAN, Shritej Shrikant. Life Expectancy and Socio Economic (World Bank) [Base de dados]. Disponível em: https://www.kaggle.com/datasets/mjshri23/life-expectancy-and-socio-economic-world-bank. Acesso em: 24 jul. 2024.
 
