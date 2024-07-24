@@ -222,6 +222,10 @@ Analisando o gráfico acima, percebe-se que as pessoas estão vivendo cada vez m
 
 O mapa abaixo reforça essa análise, indicando que as regiões mais pobres tiveram os maiores aumentos na duração da vida em comparação com as mais ricas. No entanto, é importante notar que nem todos os países tiveram dados disponíveis para esta pesquisa.
 
+<p align="center">
+  <img src="imagem/life_expectancy_dashboard.gif" alt="Saúde">
+</p>
+
 O modelo econométrico utilizado é representado pela equação abaixo, empregando variáveis socioeconômicas para alcançar a maior eficiência possível:
 
 <p align="center">
