@@ -85,7 +85,23 @@ df['Grupo de renda'] = data['IncomeGroup']
 # Salvando
 df.to_csv('mapa.csv', index=False)
 ```
-2- Gráfico de grupo de renda:
+2- Gráfico da média:
+
+```python
+mean_life_expectancy_per_year = df.groupby('Anos')['Expectativa de vida'].mean().reset_index()
+
+#Gráfico
+plt.figure(figsize=(12, 6))
+sns.lineplot(data=mean_life_expectancy_per_year, x='Anos', y='Expectativa de vida')
+plt.title('Expectativa de Vida Média Mundial')
+plt.xlabel('Ano')
+plt.ylabel('Expectativa de Vida Média')
+plt.xticks(mean_life_expectancy_per_year['Anos']) 
+plt.grid(True)
+plt.grid(False)
+plt.show()
+```
+3- Gráfico de grupo de renda:
 ```python
 # Agrupando os dados por ano e grupo de renda para obter a média da expectativa de vida
 grouped_data = data.groupby(['Anos', 'Grupo de renda'])['Expectativa de vida'].mean().reset_index()
@@ -111,7 +127,7 @@ fig.update_traces(texttemplate='%{y:.2f}', textposition='outside', textfont=dict
 
 fig.show()
 ```
-3- Dashboard do mapa:
+4- Dashboard do mapa:
 ```python
 
 #Tratando os dados para compatibilidade 
@@ -152,7 +168,7 @@ fig.show()
 ```
 Após essa análise preliminar, foram selecionadas as principais variáveis para modelar a regressão linear com dados em painel, utilizando a biblioteca Statsmodels. O modelo foi implementado com o uso de efeitos fixos e erros padrão robustos agrupados. Por fim, foi criado um gráfico de dispersão utilizando a biblioteca Seaborn para analisar se os pressupostos do OLS foram atendidos, verificando assim a robustez do modelo.
 
-4- Tratando dados para o modelo:
+5- Tratando dados para o modelo:
 ```python
 # Bibliotecas
 import pandas as pd
@@ -169,14 +185,14 @@ variables = data.drop(columns=['Country Code', 'Region', 'Corruption','Injuries'
 variables = variables.dropna()
 df = variables.reset_index()
 ```
-5- Modelando:
+6- Modelando:
 ```python
 # Modelando 
 formula = 'Q("Life Expectancy World Bank") ~ Q("Prevelance of Undernourishment") + Q("CO2") + Q("Health Expenditure %") + Q("Education Expenditure %") + Q("Unemployment") + Q("Sanitation") + C(Q("Country Name")) + C(Q("IncomeGroup"))'
 fixed_effects_model = smf.ols(formula, data=df).fit(cov_type='cluster', cov_kwds={'groups': df['Country Name']})
 fixed_effects_model.summary()
 ```
-5- Análise dos resíduos:
+7- Análise dos resíduos:
 ```python
 # Calculando os valores previstos
 df['predicted'] = fixed_effects_model.fittedvalues
@@ -194,4 +210,13 @@ plt.grid(False)
 plt.show()
 ```
 Esta abordagem permitiu uma análise detalhada e robusta dos dados, contribuindo para uma melhor compreensão das relações causais presentes no conjunto de dados estudado.
+
+## 5. Resultados:
+A ideia central deste estudo é verificar a hipótese de que fatores socioeconômicos impactam a expectativa de vida média dos países. A partir dessa premissa, buscamos concluir se ações, como políticas públicas, são capazes de melhorar a longevidade dos cidadãos. Além disso, é interessante observar se houve mudanças significativas ao longo dos anos, tanto na média da expectativa de vida quanto em seu perfil.
+
+Analisando o gráfico acima, percebe-se que as pessoas estão vivendo cada vez mais ao longo dos anos, com um crescimento linear de 2001 até 2019. Isso torna ainda mais relevante compreender os fatores que contribuíram para essa melhoria. Além disso, é crucial verificar se essa tendência ocorreu em todos os países, independentemente da renda. No gráfico abaixo, é possível identificar dois comportamentos: quanto mais pobre o grupo, menor sua expectativa de vida; e quanto mais pobre foi o grupo de renda, maior foi o crescimento da expectativa de vida durante o período analisado.
+
+O mapa abaixo reforça essa análise, indicando que as regiões mais pobres tiveram os maiores aumentos na duração da vida em comparação com as mais ricas. No entanto, é importante notar que nem todos os países tiveram dados disponíveis para esta pesquisa.
+
+O modelo econométrico utilizado é representado pela equação abaixo, empregando variáveis socioeconômicas para alcançar a maior eficiência possível:
 
