@@ -255,6 +255,10 @@ Os resultados obtidos foram bastante satisfatórios. O F-valor demonstrou signif
 
 Realizando um gráfico de dispersão dos resíduos para verificação dos pressupostos, foi observado que há heterocedasticidade, mesmo com todas as tentativas de ajuste, o que pode impactar a confiabilidade dos resultados.
 
+<p align="center">
+  <img src="imagem/Gráfico 2.png" alt="Saúde">
+</p>
+
 Este estudo destaca a importância de fatores socioeconômicos na expectativa de vida dos países, sugerindo que políticas públicas eficazes podem melhorar significativamente a longevidade dos cidadãos. Apesar de algumas limitações, como a heterocedasticidade observada, os insights obtidos fornecem uma base sólida para futuras pesquisas e intervenções.
 
 
