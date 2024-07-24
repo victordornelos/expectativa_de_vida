@@ -12,12 +12,12 @@
 **Linkedin:** [Victor Flávio Pereira Dornelos](https://www.linkedin.com/in/victor-flavio-pereira-dornelos/)
 
 ## Sumário
-1. [Descrição](https://github.com/victordornelos/regressao_python#1-descrição)
-2. [Objetivo](https://github.com/victordornelos/regressao_python#2-objetivo)
-3. [Regressão Linear com Dados em Painel](https://github.com/victordornelos/regressao_python#3-regressão-linear)
-4. [Metodologia](https://github.com/victordornelos/regressao_python#4-metodologia)
-5. [Resultados](https://github.com/victordornelos/regressao_python#5-resultados)
-6. [Referências](https://github.com/victordornelos/regressao_python#6-referências)
+1. [Descrição](https://github.com/victordornelos/expectativa_de_vida#1-descrição)
+2. [Objetivo](https://github.com/victordornelos/expectativa_de_vida#2-objetivo)
+3. [Regressão Linear com Dados em Painel](https://github.com/victordornelos/expectativa_de_vida#3-regressão-linear-com-dados-em-painel)
+4. [Metodologia](https://github.com/victordornelos/expectativa_de_vida#4-metodologia)
+5. [Resultados](https://github.com/victordornelos/expectativa_de_vida#5-resultados)
+6. [Referências](https://github.com/victordornelos/expectativa_de_vida#6-referências)
 
 ## 1. Descrição:
 O estudo da expectativa de vida tem um destaque significativo nas ciências sociais, com a Economia desempenhando um papel crucial ao promover políticas públicas que visam aumentar não apenas a longevidade, mas também a qualidade de vida. Nesse contexto, a econometria emerge como uma ferramenta essencial, utilizando estatística e matemática aplicada para conduzir pesquisas econômicas. Ela trabalha com dados sociais, possibilitando a realização de inferências causais e previsões que auxiliam os formuladores de políticas em suas decisões.
