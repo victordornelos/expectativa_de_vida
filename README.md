@@ -214,9 +214,49 @@ Esta abordagem permitiu uma análise detalhada e robusta dos dados, contribuindo
 ## 5. Resultados:
 A ideia central deste estudo é verificar a hipótese de que fatores socioeconômicos impactam a expectativa de vida média dos países. A partir dessa premissa, buscamos concluir se ações, como políticas públicas, são capazes de melhorar a longevidade dos cidadãos. Além disso, é interessante observar se houve mudanças significativas ao longo dos anos, tanto na média da expectativa de vida quanto em seu perfil.
 
+<p align="center">
+  <img src="imagem/gráfico1.png" alt="Saúde">
+</p>
+
 Analisando o gráfico acima, percebe-se que as pessoas estão vivendo cada vez mais ao longo dos anos, com um crescimento linear de 2001 até 2019. Isso torna ainda mais relevante compreender os fatores que contribuíram para essa melhoria. Além disso, é crucial verificar se essa tendência ocorreu em todos os países, independentemente da renda. No gráfico abaixo, é possível identificar dois comportamentos: quanto mais pobre o grupo, menor sua expectativa de vida; e quanto mais pobre foi o grupo de renda, maior foi o crescimento da expectativa de vida durante o período analisado.
 
 O mapa abaixo reforça essa análise, indicando que as regiões mais pobres tiveram os maiores aumentos na duração da vida em comparação com as mais ricas. No entanto, é importante notar que nem todos os países tiveram dados disponíveis para esta pesquisa.
 
 O modelo econométrico utilizado é representado pela equação abaixo, empregando variáveis socioeconômicas para alcançar a maior eficiência possível:
+
+<p align="center">
+  <img src="https://latex.codecogs.com/svg.latex?\color{white}\text{Life\_Expectancy}_{it}=\alpha+\beta_1\text{Prevalence\_of\_Undernourishment}_{it}+\beta_2\text{CO2}_{it}+\beta_3\text{Health\_Expenditure\_\%}_{it}+\beta_4\text{Education\_Expenditure\_\%}_{it}+\beta_5\text{Unemployment}_{it}+\beta_6\text{Sanitation}_{it}+\sum_{j=1}^{n-1}\gamma_j\text{Country\_Name}_j+\sum_{k=1}^{m-1}\delta_k\text{Income\_Group}_k+\epsilon_{it}">
+</p>
+
+Onde:
+
+1. **Life Expectancy<sub>it</sub>** - Expectativa de vida no país *i* no tempo *t*.
+2. **α** - Intercepto do modelo.
+3. **β<sub>1</sub> Prevalence of Undernourishment<sub>it</sub>** - Coeficiente e variável para a prevalência de subnutrição no país *i* no tempo *t*.
+4. **β<sub>2</sub> CO2<sub>it</sub>** - Coeficiente e variável para a emissão de CO2 no país *i* no tempo *t*.
+5. **β<sub>3</sub> Health Expenditure %<sub>it</sub>** - Coeficiente e variável para o percentual de gastos com saúde no país *i* no tempo *t*.
+6. **β<sub>4</sub> Education Expenditure %<sub>it</sub>** - Coeficiente e variável para o percentual de gastos com educação no país *i* no tempo *t*.
+7. **β<sub>5</sub> Unemployment<sub>it</sub>** - Coeficiente e variável para a taxa de desemprego no país *i* no tempo *t*.
+8. **β<sub>6</sub> Sanitation<sub>it</sub>** - Coeficiente e variável para a cobertura de saneamento básico no país *i* no tempo *t*.
+9. **∑<sub>j=1</sub><sup>n-1</sup> γ<sub>j</sub> Country Name<sub>j</sub>** - Termo que representa os dummies para os diferentes países, com γ<sub>j</sub> sendo o coeficiente para o país *j*.
+10. **∑<sub>k=1</sub><sup>m-1</sup> δ<sub>k</sub> Income Group<sub>k</sub>** - Termo que representa os dummies para os diferentes grupos de renda, com δ<sub>k</sub> sendo o coeficiente para o grupo de renda *k*.
+11. **ϵ<sub>it</sub>** - Termo de erro no país *i* no tempo *t*.
+
+Os resultados obtidos foram bastante satisfatórios. O F-valor demonstrou significância estatística, e o R² de 97,4% indicou que o modelo captura de forma robusta a variação da variável dependente. Em relação ao teste de hipóteses, duas variáveis importantes apresentaram significância acima do nível de confiança desejado (10%): classe média-baixa e investimento em educação, ambas passaram no teste t-valor. Quanto à autocorrelação, o valor DW de 1.491 foi classificado como inclusivo, e os resíduos apresentaram uma distribuição normal.
+
+### Principais insights:
+
+- Quanto mais rico for o país, maior será a duração da vida. 
+- Desnutrição tem impacto negativo de 18%. 
+- A poluição representada por emissão de CO2 teve um baixo impacto negativo, possivelmente porque os países que mais emitem são os mais ricos. 
+- Investimento em saúde tem um forte impacto positivo na expectativa de vida. 
+- O desemprego impacta negativamente com 8%, novamente demonstrando a importância dos fatores econômicos. 
+- Nível de saneamento tem impacto positivo de 15%.
+
+Realizando um gráfico de dispersão dos resíduos para verificação dos pressupostos, foi observado que há heterocedasticidade, mesmo com todas as tentativas de ajuste, o que pode impactar a confiabilidade dos resultados.
+
+Este estudo destaca a importância de fatores socioeconômicos na expectativa de vida dos países, sugerindo que políticas públicas eficazes podem melhorar significativamente a longevidade dos cidadãos. Apesar de algumas limitações, como a heterocedasticidade observada, os insights obtidos fornecem uma base sólida para futuras pesquisas e intervenções.
+
+
+
 
